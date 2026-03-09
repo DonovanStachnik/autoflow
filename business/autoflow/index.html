@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoFlow | Automated Client Reminders for Local Businesses</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary: #0a0a0f;
+            --accent: #00e5a0;
+            --accent-dim: rgba(0, 229, 160, 0.1);
+            --text: #ffffff;
+            --text-muted: #888;
+            --card: #151520;
+            --border: #222;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--primary);
+            color: var(--text);
+            line-height: 1.6;
+        }
+        .container { max-width: 900px; margin: 0 auto; padding: 0 20px; }
+        header { padding: 30px 0; border-bottom: 1px solid var(--border); }
+        .logo { font-size: 1.8rem; font-weight: 700; letter-spacing: -1px; }
+        .logo span { color: var(--accent); }
+        .hero { padding: 80px 0; text-align: center; }
+        .hero h1 { font-size: 3.5rem; font-weight: 800; line-height: 1.1; margin-bottom: 20px; }
+        .hero h1 span { color: var(--accent); }
+        .hero p { font-size: 1.3rem; color: var(--text-muted); max-width: 600px; margin: 0 auto 40px; }
+        .cta-button {
+            display: inline-block;
+            background: var(--accent);
+            color: var(--primary);
+            padding: 18px 40px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            text-decoration: none;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .cta-button:hover { transform: translateY(-2px); box-shadow: 0 10px 40px rgba(0, 229, 160, 0.3); }
+        .section { padding: 60px 0; }
+        .section-title { font-size: 2rem; margin-bottom: 40px; text-align: center; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 30px; }
+        .card h3 { font-size: 1.3rem; margin-bottom: 15px; color: var(--accent); }
+        .card p { color: var(--text-muted); font-size: 0.95rem; }
+        .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 40px; }
+        @media (max-width: 768px) { .pricing-grid { grid-template-columns: 1fr; } .hero h1 { font-size: 2.5rem; } }
+        .price-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 30px; text-align: center; }
+        .price-card.featured { border-color: var(--accent); background: var(--accent-dim); }
+        .price { font-size: 3rem; font-weight: 800; margin: 20px 0; }
+        .price span { font-size: 1rem; color: var(--text-muted); font-weight: 400; }
+        .price-card ul { list-style: none; text-align: left; margin: 20px 0; }
+        .price-card li { padding: 8px 0; color: var(--text-muted); font-size: 0.9rem; }
+        .price-card li::before { content: "✓"; color: var(--accent); margin-right: 10px; }
+        .step { display: flex; gap: 20px; margin-bottom: 30px; }
+        .step-number {
+            width: 50px; height: 50px; background: var(--accent); color: var(--primary);
+            border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; flex-shrink: 0;
+        }
+        .step-content h3 { margin-bottom: 5px; }
+        .step-content p { color: var(--text-muted); font-size: 0.95rem; }
+        footer { padding: 40px 0; border-top: 1px solid var(--border); text-align: center; color: var(--text-muted); font-size: 0.9rem; }
+        .trust { display: flex; justify-content: center; gap: 40px; margin-top: 40px; color: var(--text-muted); font-size: 0.85rem; }
+        .trust span { display: flex; align-items: center; gap: 8px; }
+        .contact-form { max-width: 500px; margin: 0 auto; text-align: left; }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 8px; font-size: 0.9rem; color: var(--text-muted); }
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%; padding: 14px; background: var(--card); border: 1px solid var(--border);
+            border-radius: 8px; color: var(--text); font-size: 1rem;
+        }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: none; border-color: var(--accent); }
+        #contact { scroll-margin-top: 40px; }
+    </style>
+</head>
+<body>
+    <header><div class="container"><div class="logo">Auto<span>Flow</span></div></div></header>
+    
+    <section class="hero">
+        <div class="container">
+            <h1>Stop Losing Money<br>to <span>No-Shows</span></h1>
+            <p>Automated appointment reminders and follow-ups that keep your clients showing up. Set it up once, run it forever.</p>
+            <a href="#contact" class="cta-button">Start Free Trial</a>
+            <div class="trust"><span>🔒 No contracts</span><span>⚡ 5-min setup</span><span>💰 Cancel anytime</span></div>
+        </div>
+    </section>
+    
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">The Problem</h2>
+            <div class="grid">
+                <div class="card"><h3>💸 Lost Revenue</h3><p>Every no-show costs you $50-150+. Multiply by 5-10 per week and you're losing thousands monthly.</p></div>
+                <div class="card"><h3>😩 Admin Drag</h3><p>Chasing clients, sending reminders, following up takes hours. That's time you could spend serving.</p></div>
+                <div class="card"><h3>📉 Inconsistent Income</h3><p>No-shows mess up your schedule and cash flow. It's hard to plan when you don't know who'll show.</p></div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">The Solution</h2>
+            <div class="grid">
+                <div class="card"><h3>📱 Smart Reminders</h3><p>Automated texts/emails sent 24hr and 1hr before appointments. Clients never forget.</p></div>
+                <div class="card"><h3>🔄 Follow-Ups</h3><p>Automatic post-appointment follow-ups. Ask for reviews. Re-book for next session.</p></div>
+                <div class="card"><h3>📊 Dashboard</h3><p>See who's confirmed, who cancelled, your no-show rate. All in one place.</p></div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">How It Works</h2>
+            <div class="steps">
+                <div class="step"><div class="step-number">1</div><div class="step-content"><h3>Book a Call</h3><p>We hop on a 15-min call. You tell me about your business, clients, and current workflow.</p></div></div>
+                <div class="step"><div class="step-number">2</div><div class="step-content"><h3>I Build It</h3><p>I set up your custom reminder system. Connect your calendar, customize the messages.</p></div></div>
+                <div class="step"><div class="step-number">3</div><div class="step-content"><h3>Go Live</h3><p>System activates. Clients get reminders automatically. You just show up to appointments.</p></div></div>
+            </div>
+        </div>}    </section>
+    
+    <section class="section" id="pricing">
+        <div class="container">
+            <h2 class="section-title">Simple Pricing</h2>
+            <div class="pricing-grid">
+                <div class="price-card">
+                    <h3>Starter</h3>
+                    <div class="price">$49<span>/mo</span></div>
+                    <ul>
+                        <li>Up to 50 clients</li>
+                        <li>Automated reminders</li>
+                        <li>Basic follow-ups</li>
+                        <li>Email support</li>
+                    </ul>
+                    <a href="#contact" class="cta-button" style="background:transparent;border:2px solid var(--accent);color:var(--accent);display:block;padding:12px;">Get Started</a>
+                </div>
+                <div class="price-card featured">
+                    <h3>Growth</h3>
+                    <div class="price">$99<span>/mo</span></div>
+                    <ul>
+                        <li>Up to 200 clients</li>
+                        <li>Reminders + follow-ups</li>
+                        <li>Review requests</li>
+                        <li>Re-booking automation</li>
+                        <li>Priority support</li>
+                    </ul>
+                    <a href="#contact" class="cta-button">Get Started</a>
+                </div>
+                <div class="price-card">
+                    <h3>Scale</h3>
+                    <div class="price">$199<span>/mo</span></div>
+                    <ul>
+                        <li>Unlimited clients</li>
+                        <li>Full automation suite</li>
+                        <li>Custom integrations</li>
+                        <li>Dedicated account manager</li>
+                        <li>Analytics dashboard</li>
+                    </ul>
+                    <a href="#contact" class="cta-button" style="background:transparent;border:2px solid var(--accent);color:var(--accent);display:block;padding:12px;">Get Started</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="section" id="contact">
+        <div class="container">
+            <h2 class="section-title">Ready to Cut No-Shows in Half?</h2>
+            <p style="text-align:center;color:var(--text-muted);margin-bottom:30px;">Start your free 7-day trial. No credit card required.</p>
+            <div class="contact-form">
+                <form>
+                    <div class="form-group">
+                        <label>Your Name</label>
+                        <input type="text" placeholder="John Smith">
+                    </div>
+                    <div class="form-group">
+                        <label>Business Name</label>
+                        <input type="text" placeholder="Smith's Barbershop">
+                    </div>
+                    <div class="form-group">
+                        <label>Business Type</label>
+                        <select>
+                            <option>Barber / Salon</option>
+                            <option>Personal Trainer</option>
+                            <option>Tattoo Artist</option>
+                            <option>Photographer</option>
+                            <option>Consultant / Coach</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" placeholder="you@business.com">
+                    </div>
+                    <div class="form-group">
+                        <label>Tell me about your business</label>
+                        <textarea rows="4" placeholder="How many clients per week? What are your biggest pain points?"></textarea>
+                    </div>
+                    <button type="submit" class="cta-button" style="width:100%;border:none;cursor:pointer;">Request Free Trial</button>
+                </form>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="container">
+            <p>© 2026 AutoFlow. All rights reserved.</p>
+            <p style="margin-top:10px;">Questions? <a href="#" class="contact-link">hello@autoflow.io</a></p>
+        </div>
+    </footer>
+</body>
+</html>
