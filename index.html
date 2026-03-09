@@ -431,6 +431,21 @@
             50% { transform: translateY(-20px); }
         }
         
+        /* Spinning cube */
+        .logo-cube { width: 32px; height: 32px; position: relative; transform-style: preserve-3d; animation: spin 8s linear infinite; margin: 0 auto; }
+        .cube-face { position: absolute; width: 32px; height: 32px; border: 2px solid var(--text-secondary); opacity: 0.6; }
+        .front { transform: translateZ(16px); }
+        .back { transform: rotateY(180deg) translateZ(16px); opacity: 0.4; }
+        .right { transform: rotateY(90deg) translateZ(16px); opacity: 0.8; }
+        .left { transform: rotateY(-90deg) translateZ(16px); opacity: 0.3; }
+        .top { transform: rotateX(90deg) translateZ(16px); background: var(--text-secondary); opacity: 0.2; }
+        .bottom { transform: rotateX(-90deg) translateZ(16px); opacity: 0.5; }
+        @keyframes spin {
+            0% { transform: rotateX(-20deg) rotateY(0deg); }
+            50% { transform: rotateX(-20deg) rotateY(180deg); }
+            100% { transform: rotateX(-20deg) rotateY(360deg); }
+        }
+        
         .visual-icon {
             font-size: 4rem;
             position: relative;
@@ -810,7 +825,9 @@
                     </ul>
                 </div>
                 <div class="feature-visual">
-                    <div class="visual-icon">📞</div>
+                    <div class="visual-icon">
+                        <div class="logo-cube"><div class="cube-face front"></div><div class="cube-face back"></div><div class="cube-face right"></div><div class="cube-face left"></div><div class="cube-face top"></div><div class="cube-face bottom"></div></div>
+                    </div>
                 </div>
             </div>
             <div class="feature reverse">
@@ -824,7 +841,9 @@
                     </ul>
                 </div>
                 <div class="feature-visual">
-                    <div class="visual-icon">⚙️</div>
+                    <div class="visual-icon">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--text-secondary)" stroke-width="1"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+                    </div>
                 </div>
             </div>
             <div class="feature">
@@ -838,7 +857,9 @@
                     </ul>
                 </div>
                 <div class="feature-visual">
-                    <div class="visual-icon">🚀</div>
+                    <div class="visual-icon">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--text-secondary)" stroke-width="1"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg>
+                    </div>
                 </div>
             </div>
         </div>
