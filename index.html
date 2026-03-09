@@ -11,7 +11,11 @@
             --accent: #e8e8ec;
             --accent-glow: rgba(232, 232, 236, 0.12);
             --pop: #c9a96e;
+            --pop2: #5a8aff;
+            --pop3: #e85d75;
             --pop-glow: rgba(201, 169, 110, 0.15);
+            --pop2-glow: rgba(90, 138, 255, 0.12);
+            --pop3-glow: rgba(232, 93, 117, 0.12);
             --text: #ffffff;
             --text-muted: #8a8a9a;
             --text-dim: #4a4a5a;
@@ -47,7 +51,7 @@
             height: 100%;
             pointer-events: none;
             z-index: 0;
-            background: radial-gradient(ellipse 100% 60% at 50% -10%, var(--pop-glow), transparent 50%), radial-gradient(ellipse 50% 30% at 100% 100%, rgba(100, 80, 50, 0.1), transparent);
+            background: radial-gradient(ellipse 80% 50% at 30% -10%, var(--pop-glow), transparent 50%), radial-gradient(ellipse 60% 40% at 70% 100%, var(--pop2-glow), transparent 50%), radial-gradient(ellipse 50% 30% at 80% 50%, var(--pop3-glow), transparent 50%);
             animation: bgPulse 12s ease-in-out infinite;
         }
         @keyframes bgPulse { 0%, 100% { opacity: 0.6; } 50% { opacity: 1; } }
@@ -55,7 +59,35 @@
         header { padding: 18px 0; border-bottom: 1px solid var(--border); position: fixed; top: 0; width: 100%; background: rgba(8, 8, 12, 0.9); backdrop-filter: blur(20px); z-index: 100; }
         .header-inner { display: flex; justify-content: space-between; align-items: center; }
         .logo { font-size: 1.15rem; font-weight: 600; letter-spacing: -0.5px; display: flex; align-items: center; gap: 10px; }
-        .logo-mark { width: 8px; height: 8px; background: var(--pop); box-shadow: 0 0 12px var(--pop); animation: logoPulse 2s ease-in-out infinite; }
+        .logo-cube {
+            width: 24px;
+            height: 24px;
+            position: relative;
+            transform-style: preserve-3d;
+            animation: spinCube 4s linear infinite;
+        }
+        .cube-face {
+            position: absolute;
+            width:             height: 24px;
+24px;
+            border: 2px solid var(--pop);
+            opacity: 0.8;
+        }
+        .front { transform: translateZ(12px); border-color: var(--pop); }
+        .back { transform: rotateY(180deg) translateZ(12px); border-color: var(--pop2); }
+        .right { transform: rotateY(90deg) translateZ(12px); border-color: var(--pop3); }
+        .left { transform: rotateY(-90deg) translateZ(12px); border-color: var(--pop2); }
+        .top { transform: rotateX(90deg) translateZ(12px); background: var(--pop); opacity: 0.3; }
+        .bottom { transform: rotateX(-90deg) translateZ(12px); border-color: var(--pop3); }
+        @keyframes spinCube {
+            0% { transform: rotateX(0deg) rotateY(0deg); }
+            100% { transform: rotateX(360deg) rotateY(360deg); }
+        }
+        .logo-mark { width: 8px; height: 8px; background: var(--pop); box-shadow: 0 0 12px var(--pop); }
+        @keyframes rotate3d {
+            0% { transform: rotateX(0deg) rotateY(0deg); }
+            100% { transform: rotateX(360deg) rotateY(360deg); }
+        }
         @keyframes logoPulse { 0%, 100% { box-shadow: 0 0 12px var(--pop); } 50% { box-shadow: 0 0 25px var(--pop), 0 0 35px rgba(201, 169, 110, 0.5); } }
         .logo span { color: var(--accent); }
         .header-cta { font-size: 0.85rem; color: var(--text-muted); text-decoration: none; transition: color 0.3s; }
@@ -182,7 +214,7 @@
     <header>
         <div class="container header-inner">
             <div class="logo">
-                <div class="logo-mark"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="0" y="0" width="20" height="20" stroke="currentColor" stroke-width="1.5" fill="none"/><path d="M5 15L10 5L15 15" stroke="currentColor" stroke-width="1.5" fill="none"/><line x1="3" y1="15" x2="17" y2="15" stroke="currentColor" stroke-width="1.5"/></svg></div>
+                <div class="logo-cube"><div class="cube-face front"/><div class="cube-face back"/><div class="cube-face right"/><div class="cube-face left"/><div class="cube-face top"/><div class="cube-face bottom"/></div>
                 Auto<span>Flow</span>
             </div>
             <a href="#contact" class="header-cta">Get Started</a>
@@ -208,10 +240,10 @@
     
     <div class="container">
         <div class="stats">
-            <div class="stat"><div class="stat-value">73%</div><div class="stat-label">Reduction in No-Shows</div></div>
-            <div class="stat"><div class="stat-value">2.4K</div><div class="stat-label">Businesses Served</div></div>
-            <div class="stat"><div class="stat-value">$4.2M</div><div class="stat-label">Revenue Recovered</div></div>
-            <div class="stat"><div class="stat-value">4.9</div><div class="stat-label">Average Rating</div></div>
+            <div class="stat"><div class="stat-value" style="color: var(--pop);">73%</div><div class="stat-label">Reduction in No-Shows</div></div>
+            <div class="stat"><div class="stat-value" style="color: var(--pop2);">2.4K</div><div class="stat-label">Businesses Served</div></div>
+            <div class="stat"><div class="stat-value" style="color: var(--pop3);">$4.2M</div><div class="stat-label">Revenue Recovered</div></div>
+            <div class="stat"><div class="stat-value" style="color: var(--pop);">4.9</div><div class="stat-label">Average Rating</div></div>
         </div>
     </div>
     
@@ -245,7 +277,7 @@
     <section class="section">
         <div class="container">
             <div class="section-header">
-                <span class="section-label">The Solution</span>
+                <span class="section-label" style="color: var(--pop2);">The Solution</span>
                 <h2 class="section-title">Automation That Actually Works</h2>
                 <p class="section-desc">Smart reminders that ensure your clients never forget their appointments.</p>
             </div>
@@ -305,7 +337,7 @@
     <section class="section" id="how-it-works">
         <div class="container">
             <div class="section-header">
-                <span class="section-label">How It Works</span>
+                <span class="section-label" style="color: var(--pop3);">How It Works</span>
                 <h2 class="section-title">Up and Running in 15 Minutes</h2>
                 <p class="section-desc">No technical setup required. We handle everything.</p>
             </div>
@@ -338,7 +370,7 @@
     <section class="section">
         <div class="container">
             <div class="section-header">
-                <span class="section-label">Testimonials</span>
+                <span class="section-label" style="color: var(--pop2);">Testimonials</span>
                 <h2 class="section-title">Loved by Local Businesses</h2>
             </div>
             <div class="testimonials">
