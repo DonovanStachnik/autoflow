@@ -45,12 +45,29 @@
         /* Ambient glow */
         .glow {
             position: fixed;
-            top: -300px;
+            top: -200px;
             left: 50%;
             transform: translateX(-50%);
-            width: 800px;
+            width: 900px;
+            height: 700px;
+            background: radial-gradient(ellipse, rgba(100, 150, 255, 0.12) 0%, rgba(255,100,150,0.06) 30%, transparent 70%);
+            pointer-events: none;
+            z-index: 0;
+            animation: glowPulse 8s ease-in-out infinite;
+        }
+        
+        @keyframes glowPulse {
+            0%, 100% { opacity: 0.6; transform: translateX(-50%) scale(1); }
+            50% { opacity: 1; transform: translateX(-50%) scale(1.1); }
+        }
+        
+        .glow-2 {
+            position: fixed;
+            bottom: -200px;
+            right: -200px;
+            width: 600px;
             height: 600px;
-            background: radial-gradient(ellipse, rgba(255,255,255,0.08) 0%, transparent 70%);
+            background: radial-gradient(ellipse, rgba(150, 100, 255, 0.1) 0%, transparent 60%);
             pointer-events: none;
             z-index: 0;
         }
@@ -92,11 +109,44 @@
             gap: 8px;
         }
         
-        .logo-dot {
-            width: 8px;
-            height: 8px;
+        .logo-globe {
+            width: 24px;
+            height: 24px;
+            position: relative;
+        }
+        
+        .globe-ring {
+            position: absolute;
+            border: 1.5px solid var(--text);
+            border-radius: 50%;
+            opacity: 0.7;
+        }
+        
+        .ring-1 { width: 24px; height: 24px; top: 0; left: 0; animation: globeRotate 12s linear infinite; }
+        .ring-2 { width: 18px; height: 18px; top: 3px; left: 3px; transform: rotateX(60deg); animation: globeRotate 8s linear infinite reverse; }
+        .ring-3 { width: 18px; height: 18px; top: 3px; left: 3px; transform: rotateY(60deg); animation: globeRotate 10s linear infinite; }
+        
+        .globe-dot {
+            position: absolute;
+            width: 3px;
+            height: 3px;
             background: var(--text);
             border-radius: 50%;
+            animation: globeOrbit 4s linear infinite;
+        }
+        
+        .dot-1 { top: -2px; left: 10px; animation-delay: 0s; }
+        .dot-2 { top: 20px; left: 12px; animation-delay: -2s; }
+        
+        @keyframes globeRotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        @keyframes globeOrbit {
+            0% { transform: translateY(0) translateX(0); opacity: 1; }
+            50% { transform: translateY(-8px) translateX(4px); opacity: 0.5; }
+            100% { transform: translateY(0) translateX(0); opacity: 1; }
         }
         
         .nav-links {
@@ -202,6 +252,8 @@
             transition: all 0.3s;
             cursor: pointer;
             border: none;
+            position: relative;
+            overflow: hidden;
         }
         
         .btn-primary {
@@ -212,6 +264,21 @@
         .btn-primary:hover {
             transform: translateY(-2px);
             box-shadow: 0 10px 40px rgba(255,255,255,0.15);
+        }
+        
+        .btn::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .btn:hover::before {
+            left: 100%;
         }
         
         .btn-secondary {
@@ -444,6 +511,69 @@
             0% { transform: rotateX(-20deg) rotateY(0deg); }
             50% { transform: rotateX(-20deg) rotateY(180deg); }
             100% { transform: rotateX(-20deg) rotateY(360deg); }
+        }
+        
+        /* Feature Globe */
+        .feature-globe {
+            width: 80px;
+            height: 80px;
+            position: relative;
+            animation: fgFloat 6s ease-in-out infinite;
+        }
+        
+        .fg-ring {
+            position: absolute;
+            border: 1px solid var(--text-secondary);
+            border-radius: 50%;
+            opacity: 0.5;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        .fg-ring-1 { width: 80px; height: 80px; animation: fgRotate 20s linear infinite; }
+        .fg-ring-2 { width: 60px; height: 60px; animation: fgRotate 15s linear infinite reverse; border-style: dashed; }
+        .fg-ring-3 { width: 40px; height: 40px; animation: fgRotate 10s linear infinite; }
+        
+        .fg-particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--text);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--text);
+        }
+        
+        .p1 { top: 0; left: 50%; animation: fgOrbit1 3s linear infinite; }
+        .p2 { bottom: 10px; right: 10px; animation: fgOrbit2 4s linear infinite; }
+        .p3 { top: 50%; left: 0; animation: fgOrbit3 2.5s linear infinite; }
+        
+        @keyframes fgFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        @keyframes fgRotate {
+            from { transform: translate(-50%, -50%) rotate(0deg); }
+            to { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+        
+        @keyframes fgOrbit1 {
+            0% { transform: translateY(0) translateX(0); opacity: 1; }
+            50% { transform: translateY(-30px) translateX(15px); opacity: 0.4; }
+            100% { transform: translateY(0) translateX(0); opacity: 1; }
+        }
+        
+        @keyframes fgOrbit2 {
+            0% { transform: translateY(0) translateX(0); opacity: 0.5; }
+            50% { transform: translateY(25px) translateX(-20px); opacity: 1; }
+            100% { transform: translateY(0) translateX(0); opacity: 0.5; }
+        }
+        
+        @keyframes fgOrbit3 {
+            0% { transform: translateY(0); opacity: 1; }
+            50% { transform: translateY(-15px); opacity: 0.3; }
+            100% { transform: translateY(0); opacity: 1; }
         }
         
         .visual-icon {
@@ -689,11 +819,16 @@
 <body>
     <div class="grid-bg"></div>
     <div class="glow"></div>
+    <div class="glow-2"></div>
     
     <header>
         <div class="container header-inner">
             <div class="logo">
-                <div class="logo-dot"></div>
+                <div class="logo-globe">
+                <div class="globe-ring ring-1"></div>
+                <div class="globe-ring ring-2"></div>
+                <div class="globe-ring ring-3"></div>
+            </div>
                 AutoFlow
             </div>
             <ul class="nav-links">
@@ -826,7 +961,14 @@
                 </div>
                 <div class="feature-visual">
                     <div class="visual-icon">
-                        <div class="logo-cube"><div class="cube-face front"></div><div class="cube-face back"></div><div class="cube-face right"></div><div class="cube-face left"></div><div class="cube-face top"></div><div class="cube-face bottom"></div></div>
+                        <div class="feature-globe">
+                            <div class="fg-ring fg-ring-1"></div>
+                            <div class="fg-ring fg-ring-2"></div>
+                            <div class="fg-ring fg-ring-3"></div>
+                            <div class="fg-particle p1"></div>
+                            <div class="fg-particle p2"></div>
+                            <div class="fg-particle p3"></div>
+                        </div>
                     </div>
                 </div>
             </div>
