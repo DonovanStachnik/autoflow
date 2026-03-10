@@ -110,43 +110,101 @@
         }
         
         .logo-globe {
-            width: 24px;
-            height: 24px;
+            width: 28px;
+            height: 28px;
             position: relative;
+            animation: lgFloat 4s ease-in-out infinite;
         }
         
-        .globe-ring {
-            position: absolute;
-            border: 1.5px solid var(--text);
+        .lg-sphere {
+            width: 28px;
+            height: 28px;
+            border: 1px solid var(--text);
             border-radius: 50%;
-            opacity: 0.7;
+            position: relative;
+            opacity: 0.8;
+            animation: lgSpin 20s linear infinite;
         }
         
-        .ring-1 { width: 24px; height: 24px; top: 0; left: 0; animation: globeRotate 12s linear infinite; }
-        .ring-2 { width: 18px; height: 18px; top: 3px; left: 3px; transform: rotateX(60deg); animation: globeRotate 8s linear infinite reverse; }
-        .ring-3 { width: 18px; height: 18px; top: 3px; left: 3px; transform: rotateY(60deg); animation: globeRotate 10s linear infinite; }
-        
-        .globe-dot {
+        .lg-sphere::before {
+            content: '';
             position: absolute;
-            width: 3px;
-            height: 3px;
+            width: 28px;
+            height: 14px;
+            border: 1px solid var(--text);
+            border-radius: 50%;
+            top: 50%;
+            transform: translateY(-50%);
+            opacity: 0.6;
+        }
+        
+        .lg-sphere::after {
+            content: '';
+            position: absolute;
+            width: 14px;
+            height: 28px;
+            border: 1px solid var(--text);
+            border-radius: 50%;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0.6;
+        }
+        
+        .lg-arc {
+            position: absolute;
+            width: 28px;
+            height: 28px;
+            border: 1px solid transparent;
+            border-top: 1px solid var(--text);
+            border-radius: 50%;
+            opacity: 0.5;
+            top: 0;
+            left: 0;
+        }
+        
+        .lg-arc-1 { transform: rotate(0deg); }
+        .lg-arc-2 { transform: rotate(45deg); }
+        .lg-arc-3 { transform: rotate(-45deg); }
+        
+        .lg-star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
             background: var(--text);
             border-radius: 50%;
-            animation: globeOrbit 4s linear infinite;
+            box-shadow: 0 0 4px var(--text);
         }
         
-        .dot-1 { top: -2px; left: 10px; animation-delay: 0s; }
-        .dot-2 { top: 20px; left: 12px; animation-delay: -2s; }
+        .lg-star-1 { top: -4px; left: 12px; animation: lgShoot1 2s linear infinite; }
+        .lg-star-2 { bottom: -2px; right: -2px; animation: lgShoot2 3s linear infinite; }
+        .lg-star-3 { top: 8px; right: -4px; animation: lgShoot3 2.5s linear infinite; }
         
-        @keyframes globeRotate {
+        @keyframes lgFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-4px); }
+        }
+        
+        @keyframes lgSpin {
             from { transform: rotate(0deg); }
             to { transform: rotate(360deg); }
         }
         
-        @keyframes globeOrbit {
+        @keyframes lgShoot1 {
             0% { transform: translateY(0) translateX(0); opacity: 1; }
-            50% { transform: translateY(-8px) translateX(4px); opacity: 0.5; }
-            100% { transform: translateY(0) translateX(0); opacity: 1; }
+            70% { opacity: 1; }
+            100% { transform: translateY(-20px) translateX(10px); opacity: 0; }
+        }
+        
+        @keyframes lgShoot2 {
+            0% { transform: translateY(0) translateX(0); opacity: 1; }
+            70% { opacity: 1; }
+            100% { transform: translateY(15px) translateX(-12px); opacity: 0; }
+        }
+        
+        @keyframes lgShoot3 {
+            0% { transform: translateY(0) translateX(0); opacity: 0.5; }
+            70% { opacity: 1; }
+            100% { transform: translateY(-5px) translateX(15px); opacity: 0; }
         }
         
         .nav-links {
@@ -513,67 +571,123 @@
             100% { transform: rotateX(-20deg) rotateY(360deg); }
         }
         
-        /* Feature Globe */
+        /* Feature Globe - Detailed Wireframe */
         .feature-globe {
-            width: 80px;
-            height: 80px;
+            width: 100px;
+            height: 100px;
             position: relative;
-            animation: fgFloat 6s ease-in-out infinite;
+            animation: fgFloat 4s ease-in-out infinite;
+        }
+        
+        .fg-sphere {
+            width: 100px;
+            height: 100px;
+            border: 1px solid var(--text-secondary);
+            border-radius: 50%;
+            position: relative;
+            opacity: 0.7;
+            animation: fgSpin 30s linear infinite;
+        }
+        
+        .fg-sphere::before {
+            content: '';
+            position: absolute;
+            width: 100px;
+            height: 50px;
+            border: 1px solid var(--text-secondary);
+            border-radius: 50%;
+            top: 50%;
+            transform: translateY(-50%);
+            opacity: 0.5;
+        }
+        
+        .fg-sphere::after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 100px;
+            border: 1px solid var(--text-secondary);
+            border-radius: 50%;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0.5;
+        }
+        
+        .fg-lat {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+        }
+        
+        .fg-lat::before, .fg-lat::after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            border: 1px solid var(--text-secondary);
+            border-radius: 50%;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0.4;
+        }
+        
+        .fg-lat::after {
+            width: 30px;
+            height: 30px;
         }
         
         .fg-ring {
             position: absolute;
-            border: 1px solid var(--text-secondary);
+            width: 120px;
+            height: 120px;
+            border: 1px solid transparent;
+            border-top: 1px solid var(--text-secondary);
             border-radius: 50%;
-            opacity: 0.5;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
+            opacity: 0.4;
+            animation: fgOrbitRing 25s linear infinite;
         }
         
-        .fg-ring-1 { width: 80px; height: 80px; animation: fgRotate 20s linear infinite; }
-        .fg-ring-2 { width: 60px; height: 60px; animation: fgRotate 15s linear infinite reverse; border-style: dashed; }
-        .fg-ring-3 { width: 40px; height: 40px; animation: fgRotate 10s linear infinite; }
+        .fg-ring-2 { width: 140px; height: 140px; animation: fgOrbitRing 20s linear infinite reverse; border-bottom: 1px solid var(--text-secondary); border-top: none; }
         
         .fg-particle {
             position: absolute;
-            width: 4px;
-            height: 4px;
+            width: 3px;
+            height: 3px;
             background: var(--text);
             border-radius: 50%;
-            box-shadow: 0 0 10px var(--text);
+            box-shadow: 0 0 8px var(--text);
         }
         
-        .p1 { top: 0; left: 50%; animation: fgOrbit1 3s linear infinite; }
-        .p2 { bottom: 10px; right: 10px; animation: fgOrbit2 4s linear infinite; }
-        .p3 { top: 50%; left: 0; animation: fgOrbit3 2.5s linear infinite; }
+        .p1 { top: -5px; left: 50%; animation: fgShoot 1.5s linear infinite; }
+        .p2 { bottom: 0; right: -5px; animation: fgShoot 2s linear infinite 0.5s; }
+        .p3 { top: 20%; right: -10px; animation: fgShoot 1.8s linear infinite 1s; }
+        .p4 { bottom: 10%; left: -5px; animation: fgShoot 2.2s linear infinite 0.3s; }
         
         @keyframes fgFloat {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-8px) scale(1.02); }
         }
         
-        @keyframes fgRotate {
+        @keyframes fgSpin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        @keyframes fgOrbitRing {
             from { transform: translate(-50%, -50%) rotate(0deg); }
             to { transform: translate(-50%, -50%) rotate(360deg); }
         }
         
-        @keyframes fgOrbit1 {
-            0% { transform: translateY(0) translateX(0); opacity: 1; }
-            50% { transform: translateY(-30px) translateX(15px); opacity: 0.4; }
-            100% { transform: translateY(0) translateX(0); opacity: 1; }
-        }
-        
-        @keyframes fgOrbit2 {
-            0% { transform: translateY(0) translateX(0); opacity: 0.5; }
-            50% { transform: translateY(25px) translateX(-20px); opacity: 1; }
-            100% { transform: translateY(0) translateX(0); opacity: 0.5; }
-        }
-        
-        @keyframes fgOrbit3 {
-            0% { transform: translateY(0); opacity: 1; }
-            50% { transform: translateY(-15px); opacity: 0.3; }
-            100% { transform: translateY(0); opacity: 1; }
+        @keyframes fgShoot {
+            0% { transform: translateY(0) translateX(0); opacity: 1; box-shadow: 0 0 15px var(--text); }
+            60% { opacity: 1; }
+            100% { transform: translateY(-40px) translateX(20px); opacity: 0; box-shadow: 0 0 0 transparent; }
         }
         
         .visual-icon {
@@ -962,12 +1076,14 @@
                 <div class="feature-visual">
                     <div class="visual-icon">
                         <div class="feature-globe">
-                            <div class="fg-ring fg-ring-1"></div>
+                            <div class="fg-sphere"></div>
+                            <div class="fg-lat"></div>
+                            <div class="fg-ring"></div>
                             <div class="fg-ring fg-ring-2"></div>
-                            <div class="fg-ring fg-ring-3"></div>
                             <div class="fg-particle p1"></div>
                             <div class="fg-particle p2"></div>
                             <div class="fg-particle p3"></div>
+                            <div class="fg-particle p4"></div>
                         </div>
                     </div>
                 </div>
