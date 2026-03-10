@@ -427,6 +427,21 @@
             background: var(--surface-elevated);
         }
         
+        .card::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
+            transition: left 0.5s;
+        }
+        
+        .card:hover::after {
+            left: 100%;
+        }
+        
         .card-icon {
             width: 48px;
             height: 48px;
@@ -653,6 +668,51 @@
             0% { transform: translate3d(0, 0, 0); opacity: 0.7; box-shadow: 0 0 10px var(--pop); }
             70% { opacity: 1; }
             100% { transform: translate3d(-15px, -20px, -12px); opacity: 0; }
+        }
+        
+        /* Gear icon animation */
+        .gear-icon svg {
+            animation: gearSpin 8s linear infinite;
+            transform-origin: center;
+        }
+        
+        @keyframes gearSpin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Rocket icon animation */
+        .rocket-icon svg {
+            animation: rocketFloat 2s ease-in-out infinite;
+        }
+        
+        @keyframes rocketFloat {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            25% { transform: translateY(-5px) rotate(2deg); }
+            50% { transform: translateY(0) rotate(0deg); }
+            75% { transform: translateY(5px) rotate(-2deg); }
+        }
+        
+        /* Card shimmer enhancement */
+        .card {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* Scroll reveal enhancements */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .card.reveal {
+            transition-delay: calc(var(--card-index, 0) * 0.1s);
         }
         
         .visual-icon {
@@ -1074,8 +1134,8 @@
                     </ul>
                 </div>
                 <div class="feature-visual">
-                    <div class="visual-icon">
-                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--text-secondary)" stroke-width="1"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+                    <div class="visual-icon gear-icon">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--pop)" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
                     </div>
                 </div>
             </div>
@@ -1090,8 +1150,8 @@
                     </ul>
                 </div>
                 <div class="feature-visual">
-                    <div class="visual-icon">
-                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--text-secondary)" stroke-width="1"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg>
+                    <div class="visual-icon rocket-icon">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--pop)" stroke-width="1.5"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg>
                     </div>
                 </div>
             </div>
@@ -1251,14 +1311,44 @@
         const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
-                if (entry.isIntersecting) entry.target.classList.add('visible');
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    // Add floating animation when revealed
+                    if (entry.target.classList.contains('card')) {
+                        entry.target.style.animation = 'cardFloat 3s ease-in-out infinite';
+                    }
+                }
             });
         }, observerOptions);
+        
+        // Add index for staggered card animations
+        document.querySelectorAll('.card').forEach((el, i) => {
+            el.style.setProperty('--card-index', i);
+        });
         
         document.querySelectorAll('.section-header, .card, .feature, .price-card').forEach(el => {
             el.classList.add('reveal');
             observer.observe(el);
         });
+        
+        // Add parallax-like effect on scroll for hero
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('.hero');
+            if (hero) {
+                hero.style.transform = `translateY(${scrolled * 0.3}px)`;
+            }
+        });
+        
+        // Add keyframes for card float
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes cardFloat {
+                0%, 100% { transform: translateY(0); }
+                50% { transform: translateY(-5px); }
+            }
+        `;
+        document.head.appendChild(style);
     </script>
 </body>
 </html>
