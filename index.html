@@ -1200,18 +1200,18 @@
                 <p class="section-desc">Start your free 7-day trial.</p>
             </div>
             <div class="contact-form">
-                <form>
+                <form action="https://formspree.io/f/mojkealg" method="POST">
                     <div class="form-group">
                         <label>Your Name</label>
-                        <input type="text" placeholder="John Smith">
+                        <input type="text" name="name" placeholder="John Smith" required>
                     </div>
                     <div class="form-group">
                         <label>Business Name</label>
-                        <input type="text" placeholder="Smith's Barbershop">
+                        <input type="text" name="businessName" placeholder="Smith's Barbershop">
                     </div>
                     <div class="form-group">
                         <label>Business Type</label>
-                        <select>
+                        <select name="businessType">
                             <option>Barber / Salon</option>
                             <option>Personal Trainer</option>
                             <option>Tattoo Artist</option>
@@ -1222,11 +1222,11 @@
                     </div>
                     <div class="form-group">
                         <label>Email</label>
-                        <input type="email" placeholder="you@business.com">
+                        <input type="email" name="email" placeholder="you@business.com" required>
                     </div>
                     <div class="form-group">
                         <label>Tell me about your business</label>
-                        <textarea rows="3" placeholder="How many clients per week? What are your biggest pain points?"></textarea>
+                        <textarea name="message" rows="3" placeholder="How many clients per week? What are your biggest pain points?"></textarea>
                     </div>
                     <button type="submit" class="btn btn-primary" style="width:100%;">Request Free Trial</button>
                 </form>
